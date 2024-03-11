@@ -7,6 +7,6 @@ describe("New Weapon Model", () => {
   });
   it("index method should return a list of products", async () => {
     const result = await store.index();
-    expect(result).toEqual([]);
+    expect(result).toEqual([{ name: 'test', type: 'a', weight: 1, id: 1 }]);
   });
 });
