@@ -6,6 +6,8 @@ const { POSTGRES_HOST, POSTGRES_DB, POSTGRES_TEST_DB, POSTGRES_USER, POSTGRES_PA
 
 let Client: Pool = new Pool();
 console.log(ENV)
+console.log(ENV === "test")
+
 if (ENV === 'dev') {
     console.log(POSTGRES_DB)
     Client = new Pool({
