@@ -7,6 +7,7 @@ export type Weapon = {
     type: string;
     weight: number;
 }
+
 export class NewWeaponStore {
     async index(): Promise<Weapon[]> {
         try {
