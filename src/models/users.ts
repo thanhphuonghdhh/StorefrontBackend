@@ -1,49 +1,91 @@
-import bcrypt from 'bcrypt'
-import Client from '../database';
+import bcrypt from "bcrypt";
+import Client from "../database";
+
+export type UserInfo = {
+  username: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+};
 
 export type User = {
-    username: string;
-    password: string;
-}
+  username: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  id: number;
+};
 
 export class UserStore {
-    async create(u: User): Promise<User> {
-        try {
-          // @ts-ignore
-          const conn = await Client.connect()
-          const sql = 'INSERT INTO users (username, password_digest) VALUES($1, $2) RETURNING *'
-          const hash = bcrypt.hashSync(
-            u.password + process.env.BCRYPT_PASSWORD, 
-            parseInt(process.env.SALT_ROUNDS!)
-          );
-    
-          const result = await conn.query(sql, [u.username, hash])
-          const user = result.rows[0]
-    
-          conn.release()
-    
-          return user;
-        } catch(err) {
-          throw new Error(`unable create user (${u.username}): ${err}`)
-        } 
-      }
+  async index(): Promise<User[]> {
+    try {
+      // @ts-ignore
+      const conn = await Client.connect();
+      const sql = "select * from users";
+      const res = await conn.query(sql);
+      conn.release();
+      return res.rows;
+    } catch (err) {
+      throw new Error(`Can not get users ${err}`);
+    }
+  }
 
-      async authenticate(username: string, password: string): Promise<User | null> {
-        const conn = await Client.connect()
-        const sql = 'SELECT username, password_digest FROM users WHERE username=($1)'
-    
-        const result = await conn.query(sql, [username])
-    
-        console.log(password + process.env.BCRYPT_PASSWORD)
-    
-        if(result.rows.length) {
-          const user = result.rows[0]
-          console.log(user)
-          if (bcrypt.compareSync(password + process.env.BCRYPT_PASSWORD, user.password_digest)) {
-            return user
-          }
-        }
-    
-        return null
+  async show(id: string): Promise<User> {
+    try {
+      // @ts-ignore
+      const conn = await Client.connect();
+      const sql = "select * from users where id=($1)";
+      const res = await conn.query(sql, [id]);
+      conn.release();
+      return res.rows[0];
+    } catch (err) {
+      throw new Error(`Can not get users ${err}`);
+    }
+  }
+
+  async create(u: UserInfo): Promise<User> {
+    try {
+      // @ts-ignore
+      const conn = await Client.connect();
+      const sql =
+        "INSERT INTO users (username, password, firstname, lastname) VALUES($1, $2, $3, $4) RETURNING *";
+      const hash = bcrypt.hashSync(
+        u.password + process.env.BCRYPT_PASSWORD,
+        parseInt(process.env.SALT_ROUNDS!)
+      );
+
+      const result = await conn.query(sql, [
+        u.username,
+        hash,
+        u.firstname,
+        u.lastname,
+      ]);
+      const user = result.rows[0];
+      conn.release();
+      return user;
+    } catch (err) {
+      throw new Error(`unable create user (${u.username}): ${err}`);
+    }
+  }
+
+  async authenticate(username: string, password: string): Promise<User | null> {
+    const conn = await Client.connect();
+    const sql =
+      "SELECT username, password_digest FROM users WHERE username=($1)";
+    const result = await conn.query(sql, [username]);
+    if (result.rows.length) {
+      const user = result.rows[0];
+      console.log(user);
+      if (
+        bcrypt.compareSync(
+          password + process.env.BCRYPT_PASSWORD,
+          user.password_digest
+        )
+      ) {
+        return user;
       }
+    }
+
+    return null;
+  }
 }
