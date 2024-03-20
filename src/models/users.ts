@@ -39,7 +39,7 @@ export class UserStore {
       conn.release();
       return res.rows[0];
     } catch (err) {
-      throw new Error(`Can not get users ${err}`);
+      throw new Error(`Cannot get users ${err}`);
     }
   }
 

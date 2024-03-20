@@ -5,31 +5,28 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index GET: http://localhost:3000/products
+- Show GET: http://localhost:3000/product/:id
+- Create [token required]: POST http://localhost:3000/product
 
 #### Users
 - Index [token required] GET: http://localhost:3000/users
-- Show [token required] GET: http://localhost:3000/user/1
+- Show [token required] GET: http://localhost:3000/user/:id
 - Create N[token required] POST: http://localhost:3000/user
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required] GET: http://localhost:3000/orders/:userId
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] GET: http://localhost:3000/completed-orders/:userId
 
 ## Data Shapes
 #### Product
--  id
+- id
 - name
 - price
-- [OPTIONAL] category
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(64) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     price integer NOT NULL
 );
 
@@ -42,7 +39,7 @@ CREATE TABLE products (
 CREATE TABLE users(
     firstname VARCHAR(100),
     lastname VARCHAR(100),
-    username VARCHAR(100) NOT NULL, 
+    username VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     id SERIAL PRIMARY KEY
 )

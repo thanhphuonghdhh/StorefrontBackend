@@ -5,4 +5,4 @@ CREATE TABLE users(
     password VARCHAR(100) NOT NULL,
     id SERIAL PRIMARY KEY
 );
-INSERT INTO users VALUES('phuong','vuong','pv','1');
+-- INSERT INTO users(firstname, lastname, username, password) VALUES('phuong','vuong','pv','1');

@@ -1,6 +1,5 @@
 import { Application, Request, Response } from "express";
 import { UserInfo, UserStore } from "../models/users";
-import { sign } from "jsonwebtoken";
 import {
   createTokenFromUser,
   verifyAuthToken,
@@ -37,8 +36,7 @@ const create = async (req: Request, res: Response) => {
   };
   try {
     const newUser = await store.create(user);
-    let token = sign({ user: newUser }, process.env.TOKEN_SECRET!);
-    res.json(token);
+    res.json(createTokenFromUser(newUser));
   } catch (err) {
     res.status(400);
     // @ts-ignore
@@ -59,7 +57,7 @@ const authenUser = async (req: Request, res: Response) => {
 
 export const users_routes = (app: Application) => {
   app.get("/users", verifyAuthToken, index);
-  app.get("/user/:id", show);
-  app.post("/user", create);
+  app.get("/user/:id", verifyAuthToken, show);
+  app.post("/user", verifyAuthToken, create);
   app.post("/authen", authenUser);
 };
