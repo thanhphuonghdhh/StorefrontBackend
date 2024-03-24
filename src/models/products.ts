@@ -60,7 +60,7 @@ export class ProductStore {
   ): Promise<Order> {
     try {
       const sql =
-        "INSERT INTO order_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
+        "INSERT INTO orders_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
       //@ts-ignore
       const conn = await Client.connect();
 

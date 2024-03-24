@@ -59,5 +59,6 @@ export const users_routes = (app: Application) => {
   app.get("/users", verifyAuthToken, index);
   app.get("/user/:id", verifyAuthToken, show);
   app.post("/user", verifyAuthToken, create);
+  app.post("/super-user", create); //this endpoint for testing only
   app.post("/authen", authenUser);
 };

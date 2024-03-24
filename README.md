@@ -4,15 +4,6 @@
 
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm install` in your terminal at the project root.
 
-## Required Technologiesa
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
-
 ## Steps to Completion
 
 ### 1. Plan to Meet Requirements
@@ -35,3 +26,8 @@ ENV=dev
 BCRYPT_PASSWORD=thanhphuonghdhh
 SALT_ROUNDS=10
 TOKEN_SECRET=supersecrettoken
+
+# Scripts to run this project
+start: npm start
+test: npm test
+build: npm build
