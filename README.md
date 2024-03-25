@@ -18,15 +18,15 @@ This repo contains a basic Node and Express app to get you started in constructi
 - Database will run on port 5432
 
 # ENV data:
-POSTGRES_HOST=localhost
-POSTGRES_DB=storefront_db_dev
-POSTGRES_TEST_DB=storefront_db_test
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=1
-ENV=dev
-BCRYPT_PASSWORD=thanhphuonghdhh
-SALT_ROUNDS=10
-TOKEN_SECRET=supersecrettoken
+POSTGRES_HOST=localhost  
+POSTGRES_DB=storefront_db_dev  
+POSTGRES_TEST_DB=storefront_db_test  
+POSTGRES_USER=postgres  
+POSTGRES_PASSWORD=1  
+ENV=dev  
+BCRYPT_PASSWORD=thanhphuonghdhh  
+SALT_ROUNDS=10  
+TOKEN_SECRET=supersecrettoken  
 
 # Scripts to run this project
 start: npm start
