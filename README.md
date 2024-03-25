@@ -3,7 +3,7 @@
 ## Getting Started
 
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm install` in your terminal at the project root.
-**NOTE: MUST install npm i --save-dev @types/pg@8.11.2
+### NOTE: MUST install npm i --save-dev @types/pg@8.11.2
 
 ## Steps to Completion
 
