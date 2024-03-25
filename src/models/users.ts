@@ -17,7 +17,7 @@ export type User = {
 };
 
 export class UserStore {
-  async index(): Promise<User[]> {
+  index = async (): Promise<User[]> => {
     try {
       // @ts-ignore
       const conn = await Client.connect();
@@ -28,9 +28,9 @@ export class UserStore {
     } catch (err) {
       throw new Error(`Can not get users ${err}`);
     }
-  }
+  };
 
-  async show(id: string): Promise<User> {
+  show = async (id: string): Promise<User> => {
     try {
       // @ts-ignore
       const conn = await Client.connect();
@@ -41,9 +41,9 @@ export class UserStore {
     } catch (err) {
       throw new Error(`Cannot get users ${err}`);
     }
-  }
+  };
 
-  async create(u: UserInfo): Promise<User> {
+  create = async (u: UserInfo): Promise<User> => {
     try {
       // @ts-ignore
       const conn = await Client.connect();
@@ -66,12 +66,14 @@ export class UserStore {
     } catch (err) {
       throw new Error(`unable create user (${u.username}): ${err}`);
     }
-  }
+  };
 
-  async authenticate(username: string, password: string): Promise<User | null> {
+  authenticate = async (
+    username: string,
+    password: string
+  ): Promise<User | null> => {
     const conn = await Client.connect();
-    const sql =
-      "SELECT username, password FROM users WHERE username=($1)";
+    const sql = "SELECT username, password FROM users WHERE username=($1)";
     const result = await conn.query(sql, [username]);
     if (result.rows.length) {
       const user = result.rows[0];
@@ -86,5 +88,5 @@ export class UserStore {
     }
 
     return null;
-  }
+  };
 }
