@@ -3,7 +3,8 @@
 ## Getting Started
 
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm install` in your terminal at the project root.
-### NOTE: MUST install npm i --save-dev @types/pg@8.11.2
+### NOTE:
+After run npm install, PLEASE RUN `install npm i --save-dev @types/pg@8.11.2` because it may have an error when version of types/pg > 8.11.2.
 
 ## Steps to Completion
 
@@ -32,3 +33,7 @@ TOKEN_SECRET=supersecrettoken
 start: npm start
 test: npm test
 build: npm build
+
+# Changes after review
+1. The project fails to build correctly: Please run `install npm i --save-dev @types/pg@8.11.2` as I noted before.
+2. The value of the spec_dir must be the build folder and the spec files tested should be the test specs within the build folder: fixed
